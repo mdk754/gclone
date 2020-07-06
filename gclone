@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+
+from urllib.parse import urlparse
+import os, sys, subprocess
+
+repository = sys.argv[1]
+
+# Convert a git URL to an https one for ease of parsing.
+if repository.startswith("git@"):
+	repository = repository.replace(":", "/")
+	repository = repository.replace("git@", "https://")
+
+url = urlparse(repository)
+host = url.hostname
+path = url.path[1:]
+
+# Remove .git suffix for cleaner folder names.
+if path.endswith(".git"):
+	path = path[:-4]
+
+# TODO: This should probably come in through an environment variable.
+user_folder = os.path.expanduser("~")
+folder = os.path.join(user_folder, "git", host, path)
+
+exit(subprocess.run(["git", "clone", sys.argv[1], folder]).returncode)
