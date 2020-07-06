@@ -2,6 +2,7 @@
 
 > Simple utility to keep your local repo paths organized.
 
+
 ## How it Works
 
 When cloning, it simply infers local path information from the given url. It
@@ -26,3 +27,10 @@ Where:
 $ gclone git@github.com:mdk754/gclone.git
 Cloning into '/home/$USER/git/github.com/mdk754/gclone'...
 ```
+
+
+## Installation
+
+From your shell, just: `sudo ./install.sh`
+
+This will place the executable into `/usr/local/bin` by default.
